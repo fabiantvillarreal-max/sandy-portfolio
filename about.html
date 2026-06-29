@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sandra Gómez — Work</title>
+  <title>Sandra Gómez — sandy.info</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body data-page="work">
+<body data-page="about">
 
   <header class="topnav" id="topnav"></header>
 
@@ -17,27 +17,13 @@
     <aside class="sidebar" id="sidebar"></aside>
 
     <main class="main">
-      <section class="section" id="work">
-        <div class="section__header">
-          <span class="section__label">Work</span>
-          <div class="work__filters" id="work-filters"></div>
-        </div>
-        <div class="work__grid" id="work-grid"></div>
-      </section>
+      <div id="about-content"></div>
 
       <footer class="footer">
         <span class="footer__copy"></span>
         <button class="footer__edit-btn" id="edit-toggle" title="Edit mode (Ctrl+Shift+E)">✏</button>
       </footer>
     </main>
-  </div>
-
-  <div class="modal" id="video-modal">
-    <div class="modal__backdrop" id="modal-backdrop"></div>
-    <div class="modal__content">
-      <button class="modal__close" id="modal-close">✕</button>
-      <div class="modal__video" id="modal-video"></div>
-    </div>
   </div>
 
   <script src="js/content.js"></script>

@@ -10,8 +10,29 @@ window.PORTFOLIO = {
   tagline: "Merging art, design & artificial intelligence to craft innovative visual experiences.",
   heroImage: "images/profile.jpg",
 
-  // --- ABOUT ---
-  about: "Multidisciplinary designer passionate about merging art, design, and artificial intelligence to craft innovative visual experiences. Currently pursuing a Master of Science in Digital Arts and Creative Technologies at La Salle Barcelona. Skilled in visual storytelling, branding, and AI-assisted creation, I constantly explore how technology can elevate emotion, aesthetics, and meaning in every project.",
+  // --- ABOUT / SANDY.INFO ---
+  about: "I'm a multidisciplinary designer based in Barcelona, passionate about the intersection of art, technology, and human experience. I work across AI creative direction, immersive installations, interactive media, and photography — always searching for the emotional core of every project.\n\nCurrently pursuing a Master of Science in Digital Arts and Creative Technologies at La Salle Barcelona. Before that, years of hands-on work crafting campaigns, visual identities, and spatial experiences for brands and cultural projects.\n\nI believe great design doesn't just look good — it makes people feel something.",
+
+  // --- INFO BLOCKS (shown on sandy.info page) ---
+  info: {
+    education: "MSc Digital Arts & Creative Technologies\nLa Salle — Ramon Llull University, Barcelona",
+    disciplines: [
+      "AI Creative Direction",
+      "Immersive Installations",
+      "Interactive Experiences",
+      "Visual Storytelling",
+      "Art Direction",
+      "Photography"
+    ],
+    tools: [
+      "Adobe Creative Suite",
+      "Midjourney · Stable Diffusion",
+      "After Effects · DaVinci Resolve",
+      "Figma",
+      "TouchDesigner"
+    ],
+    languages: "Spanish (native) · English (professional)"
+  },
 
   // --- PROJECTS ---
   // To add a project: copy one object {} and paste it at the end of the array
