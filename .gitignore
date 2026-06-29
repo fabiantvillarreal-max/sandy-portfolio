@@ -1,0 +1,9 @@
+# Claude / private files
+/private/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Personal files
+*.pdf

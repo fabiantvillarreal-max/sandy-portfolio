@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sandra Gómez — Multidisciplinary Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__logo" id="nav-logo"></div>
+    <div class="nav__links" id="nav-links"></div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero__content">
+      <div class="hero__text">
+        <h1 class="hero__name" id="hero-name"></h1>
+        <p class="hero__title" id="hero-title"></p>
+        <p class="hero__tagline" id="hero-tagline"></p>
+        <a class="btn" href="#work">View Work</a>
+      </div>
+      <div class="hero__image">
+        <img id="hero-img" src="" alt="Sandra Gómez" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about section" id="about">
+    <div class="section__inner">
+      <span class="section__label">About</span>
+      <p class="about__text" id="about-text"></p>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="work section" id="work">
+    <div class="section__inner">
+      <span class="section__label">Work</span>
+      <div class="work__filters" id="work-filters"></div>
+      <div class="work__grid" id="work-grid"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact section" id="contact">
+    <div class="section__inner">
+      <span class="section__label">Contact</span>
+      <div class="contact__content" id="contact-content"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span id="footer-name"></span>
+    <button class="footer__edit-btn" id="edit-toggle" title="Toggle edit mode (Ctrl+Shift+E)">✏</button>
+  </footer>
+
+  <!-- VIDEO MODAL -->
+  <div class="modal" id="video-modal">
+    <div class="modal__backdrop" id="modal-backdrop"></div>
+    <div class="modal__content">
+      <button class="modal__close" id="modal-close">✕</button>
+      <div class="modal__video" id="modal-video"></div>
+    </div>
+  </div>
+
+  <script src="js/content.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/editor.js"></script>
+</body>
+</html>
