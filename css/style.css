@@ -397,22 +397,23 @@ button { cursor: pointer; font-family: inherit; }
 .work__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
+  gap: 16px;
 }
 
 .project-card {
-  background: var(--bg);
+  background: var(--nav-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: border-color 0.15s, transform 0.15s;
 }
 
-.project-card:hover { background: var(--nav-bg); }
+.project-card:hover {
+  border-color: var(--surface-alt);
+  transform: translateY(-2px);
+}
 
 .project-card__media {
   aspect-ratio: 4/3;
