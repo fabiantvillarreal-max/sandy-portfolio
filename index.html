@@ -6,7 +6,7 @@
   <title>Sandra Gómez — Multidisciplinary Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -21,10 +21,14 @@
   <section class="hero" id="hero">
     <div class="hero__content">
       <div class="hero__text">
+        <p class="hero__eyebrow">Available for freelance</p>
         <h1 class="hero__name" id="hero-name"></h1>
         <p class="hero__title" id="hero-title"></p>
         <p class="hero__tagline" id="hero-tagline"></p>
-        <a class="btn" href="#work">View Work</a>
+        <div class="hero__cta">
+          <a class="btn btn-primary" href="#work">View Work</a>
+          <a class="btn" href="#contact">Get in touch</a>
+        </div>
       </div>
       <div class="hero__image">
         <img id="hero-img" src="" alt="Sandra Gómez" />
@@ -35,7 +39,9 @@
   <!-- ABOUT -->
   <section class="about section" id="about">
     <div class="section__inner">
-      <span class="section__label">About</span>
+      <div class="section__header">
+        <span class="section__label">About</span>
+      </div>
       <p class="about__text" id="about-text"></p>
     </div>
   </section>
@@ -43,8 +49,12 @@
   <!-- WORK -->
   <section class="work section" id="work">
     <div class="section__inner">
-      <span class="section__label">Work</span>
-      <div class="work__filters" id="work-filters"></div>
+      <div class="section__header">
+        <span class="section__label">Work</span>
+      </div>
+      <div class="work__top">
+        <div class="work__filters" id="work-filters"></div>
+      </div>
       <div class="work__grid" id="work-grid"></div>
     </div>
   </section>
@@ -52,14 +62,16 @@
   <!-- CONTACT -->
   <section class="contact section" id="contact">
     <div class="section__inner">
-      <span class="section__label">Contact</span>
-      <div class="contact__content" id="contact-content"></div>
+      <div class="section__header">
+        <span class="section__label">Contact</span>
+      </div>
+      <div id="contact-content"></div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <span id="footer-name"></span>
+    <span class="footer__copy"></span>
     <button class="footer__edit-btn" id="edit-toggle" title="Toggle edit mode (Ctrl+Shift+E)">✏</button>
   </footer>
 
