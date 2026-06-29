@@ -38,6 +38,19 @@
     </div>
   </div>
 
+  <!-- Netlify Identity — handles invite/login redirects to /admin -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', function(user) {
+        if (!user) {
+          window.netlifyIdentity.on('login', function() {
+            document.location.href = '/admin/';
+          });
+        }
+      });
+    }
+  </script>
   <!-- Fallback data for local file:// testing -->
   <script src="js/content.js"></script>
   <!-- App modules (define functions, do not execute yet) -->
