@@ -15,7 +15,6 @@
 
   <div class="page">
     <aside class="sidebar" id="sidebar"></aside>
-
     <main class="main">
       <section class="section" id="work">
         <div class="section__header">
@@ -24,10 +23,9 @@
         </div>
         <div class="work__grid" id="work-grid"></div>
       </section>
-
       <footer class="footer">
         <span class="footer__copy"></span>
-        <button class="footer__edit-btn" id="edit-toggle" title="Edit mode (Ctrl+Shift+E)">✏</button>
+        <button class="footer__edit-btn" id="edit-toggle" title="Open content manager">✏</button>
       </footer>
     </main>
   </div>
@@ -40,9 +38,13 @@
     </div>
   </div>
 
+  <!-- Fallback data for local file:// testing -->
   <script src="js/content.js"></script>
+  <!-- App modules (define functions, do not execute yet) -->
   <script src="js/layout.js"></script>
   <script src="js/render.js"></script>
   <script src="js/editor.js"></script>
+  <!-- Loads JSON data then calls all init functions -->
+  <script src="js/data.js"></script>
 </body>
 </html>

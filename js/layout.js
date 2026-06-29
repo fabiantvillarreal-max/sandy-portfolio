@@ -1,6 +1,6 @@
-// js/layout.js — shared topnav + sidebar across all pages
+// js/layout.js — shared topnav + sidebar (called by data.js after PORTFOLIO loads)
 
-(function () {
+function initLayout() {
   const P = window.PORTFOLIO;
   const page = document.body.dataset.page;
 
@@ -38,36 +38,36 @@
   setInterval(updateTime, 30000);
 
   // ── SIDEBAR ────────────────────────────────────────
+  const s = P.socials || {};
   document.getElementById('sidebar').innerHTML = `
     <div class="sidebar__top">
 
       <div class="sidebar__profile">
-        <div class="sidebar__avatar-wrap" id="avatar-wrap">
-          <img class="sidebar__avatar" id="sidebar-avatar" src="${P.heroImage}" alt="${P.name}"
+        <div class="sidebar__avatar-wrap">
+          <img class="sidebar__avatar" src="${P.heroImage}" alt="${P.name}"
             onerror="this.style.display='none'" />
           <div class="sidebar__avatar-placeholder">SG</div>
-          <button class="sidebar__avatar-edit" id="avatar-edit-btn" title="Change photo">📷</button>
         </div>
         <div class="sidebar__identity">
-          <p class="sidebar__name" data-editable="name">${P.name}</p>
-          <p class="sidebar__title" data-editable="title">${P.title}</p>
+          <p class="sidebar__name">${P.name}</p>
+          <p class="sidebar__title">${P.title}</p>
         </div>
       </div>
 
-      <p class="sidebar__bio" data-editable="tagline">${P.tagline}</p>
+      <p class="sidebar__bio">${P.tagline}</p>
 
       <ul class="sidebar__contact">
         <li class="sidebar__contact-item">
           <span class="sidebar__contact-icon">📍</span>
-          <span class="sidebar__contact-text" data-editable="location">${P.location}</span>
+          <span class="sidebar__contact-text">${P.location}</span>
         </li>
         <li class="sidebar__contact-item">
           <span class="sidebar__contact-icon">✉</span>
-          <a class="sidebar__contact-link" href="mailto:${P.email}" data-editable="email">${P.email}</a>
+          <a class="sidebar__contact-link" href="mailto:${P.email}">${P.email}</a>
         </li>
-        ${P.socials.behance   ? `<li class="sidebar__contact-item"><span class="sidebar__contact-icon">🔗</span><a class="sidebar__contact-link" href="${P.socials.behance}"   target="_blank" rel="noopener" data-editable="socials.behance">Behance</a></li>` : ''}
-        ${P.socials.linkedin  ? `<li class="sidebar__contact-item"><span class="sidebar__contact-icon">🔗</span><a class="sidebar__contact-link" href="${P.socials.linkedin}"  target="_blank" rel="noopener" data-editable="socials.linkedin">LinkedIn</a></li>` : ''}
-        ${P.socials.instagram ? `<li class="sidebar__contact-item"><span class="sidebar__contact-icon">🔗</span><a class="sidebar__contact-link" href="${P.socials.instagram}" target="_blank" rel="noopener" data-editable="socials.instagram">Instagram</a></li>` : ''}
+        ${s.behance   ? `<li class="sidebar__contact-item"><span class="sidebar__contact-icon">🔗</span><a class="sidebar__contact-link" href="${s.behance}"   target="_blank" rel="noopener">Behance</a></li>` : ''}
+        ${s.linkedin  ? `<li class="sidebar__contact-item"><span class="sidebar__contact-icon">🔗</span><a class="sidebar__contact-link" href="${s.linkedin}"  target="_blank" rel="noopener">LinkedIn</a></li>` : ''}
+        ${s.instagram ? `<li class="sidebar__contact-item"><span class="sidebar__contact-icon">🔗</span><a class="sidebar__contact-link" href="${s.instagram}" target="_blank" rel="noopener">Instagram</a></li>` : ''}
       </ul>
 
     </div>
@@ -86,25 +86,6 @@
     </div>
   `;
 
-  // Avatar photo picker (edit mode only)
-  document.getElementById('avatar-edit-btn').addEventListener('click', () => {
-    if (!document.body.classList.contains('edit-mode')) return;
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    input.onchange = e => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const url = URL.createObjectURL(file);
-      const img = document.getElementById('sidebar-avatar');
-      img.src = url;
-      img.style.display = 'block';
-      window.PORTFOLIO.heroImage = 'images/' + file.name;
-      window._pendingAvatarFile = file;
-    };
-    input.click();
-  });
-
   const footerCopy = document.querySelector('.footer__copy');
   if (footerCopy) footerCopy.textContent = `© ${new Date().getFullYear()} ${P.name}`;
-})();
+}

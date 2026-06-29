@@ -1,0 +1,68 @@
+backend:
+  name: git-gateway
+  branch: master
+
+media_folder: images
+public_folder: /images
+
+locale: es
+
+collections:
+  - name: portfolio
+    label: Portfolio
+    files:
+
+      - name: info
+        label: 🙋 Mi información personal
+        file: _data/portfolio.json
+        format: json
+        fields:
+          - { label: Nombre, name: name, widget: string }
+          - { label: Título profesional, name: title, widget: string }
+          - { label: Bio corta (sidebar), name: tagline, widget: text }
+          - { label: Sobre mí (página sandy.info), name: about, widget: text }
+          - { label: Foto de perfil, name: heroImage, widget: image }
+          - { label: Email, name: email, widget: string }
+          - { label: Ubicación, name: location, widget: string }
+
+          - label: Redes sociales
+            name: socials
+            widget: object
+            fields:
+              - { label: Behance (URL completa), name: behance, widget: string, required: false, default: "" }
+              - { label: LinkedIn (URL completa), name: linkedin, widget: string, required: false, default: "" }
+              - { label: Instagram (URL completa), name: instagram, widget: string, required: false, default: "" }
+
+          - label: Más info (sandy.info)
+            name: info
+            widget: object
+            fields:
+              - { label: Educación, name: education, widget: text }
+              - { label: Idiomas, name: languages, widget: string }
+              - label: Disciplinas
+                name: disciplines
+                widget: list
+              - label: Herramientas y software
+                name: tools
+                widget: list
+
+          - label: Categorías de proyectos
+            name: categories
+            widget: list
+
+          - label: Proyectos
+            name: projects
+            widget: list
+            label_singular: Proyecto
+            fields:
+              - { label: Título, name: title, widget: string }
+              - { label: Descripción, name: description, widget: text }
+              - { label: Categoría, name: category, widget: string }
+              - label: Tipo
+                name: type
+                widget: select
+                options:
+                  - { label: Imagen, value: image }
+                  - { label: Video, value: video }
+              - { label: Imagen del proyecto, name: image, widget: image }
+              - { label: "URL del video (YouTube o Vimeo)", name: video, widget: string, required: false, default: "" }
