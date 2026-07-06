@@ -1,11 +1,12 @@
 {
-  "name": "Sandra Gómez",
-  "title": "Multidisciplinary Designer",
-  "tagline": "Merging art, design & artificial intelligence to craft innovative visual experiences.",
   "heroImage": "images/profile.jpg",
+  "socials": {
+    "behance": "https://www.behance.net/sandragomez36",
+    "linkedin": "https://www.linkedin.com/in/sandsart/",
+    "instagram": ""
+  },
+  "name": "Sandra Gómez",
   "about": "I'm a multidisciplinary designer based in Barcelona, passionate about the intersection of art, technology, and human experience. I work across AI creative direction, immersive installations, interactive media, and photography — always searching for the emotional core of every project.\n\nCurrently pursuing a Master of Science in Digital Arts and Creative Technologies at La Salle Barcelona. Before that, years of hands-on work crafting campaigns, visual identities, and spatial experiences for brands and cultural projects.\n\nI believe great design doesn't just look good — it makes people feel something.",
-  "email": "sandygvz96@gmail.com",
-  "location": "Barcelona, Spain",
   "info": {
     "education": "MSc Digital Arts & Creative Technologies\nLa Salle — Ramon Llull University, Barcelona",
     "languages": "Spanish (native) · English (professional)",
@@ -25,12 +26,9 @@
       "TouchDesigner"
     ]
   },
-  "socials": {
-    "behance": "https://www.behance.net/sandragomez36",
-    "linkedin": "",
-    "instagram": ""
-  },
-  "categories": ["AI & Branding", "Interactive", "Photography"],
+  "tagline": "Merging art, design & artificial intelligence to craft innovative visual experiences.",
+  "location": "Barcelona, Spain",
+  "title": "Multidisciplinary Designer",
   "projects": [
     {
       "title": "Escribà — AI Creative Direction",
@@ -64,5 +62,11 @@
       "image": "images/project-photo.jpg",
       "video": ""
     }
-  ]
+  ],
+  "categories": [
+    "AI & Branding",
+    "Interactive",
+    "Photography"
+  ],
+  "email": "sandygvz96@gmail.com"
 }
