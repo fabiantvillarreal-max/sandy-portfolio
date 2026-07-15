@@ -39,10 +39,6 @@ function initRender() {
           <div class="project-card__media">
             <img src="${cover}" alt="${p.title}"
               onerror="this.outerHTML='<div class=\\'placeholder-img\\'>YOUR IMAGE</div>'" />
-            ${hasVideo ? `
-              <div class="project-card__play-icon">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
-              </div>` : ''}
           </div>
           <div class="project-card__info">
             <div class="project-card__meta">
@@ -64,7 +60,10 @@ function initRender() {
     }
 
     // ── PROJECT DETAIL MODAL ────────────────────────────
+    const SLIDE_WIDTH_RATIO = 0.68; // active slide's width as a fraction of the viewer
+
     const modal = document.getElementById('project-modal');
+    const modalViewer = document.getElementById('modal-viewer');
     const modalTrack = document.getElementById('modal-track');
     const modalPrev = document.getElementById('modal-prev');
     const modalNext = document.getElementById('modal-next');
@@ -72,6 +71,21 @@ function initRender() {
     const modalTitle = document.getElementById('modal-title');
     const modalCategory = document.getElementById('modal-category');
     const modalDescription = document.getElementById('modal-description');
+
+    // Sizes slides and side padding in real pixels (not %) so the flex-basis
+    // and padding are computed against the same box — percentages for both
+    // would be resolved against different boxes (padding shrinks the content
+    // box flex-basis% is measured against), throwing off centering.
+    function layoutSlides() {
+      const viewerWidth = modalViewer.clientWidth;
+      const slideWidthPx = Math.round(viewerWidth * SLIDE_WIDTH_RATIO);
+      const sidePadPx = Math.round((viewerWidth - slideWidthPx) / 2);
+      modalTrack.style.paddingLeft = sidePadPx + 'px';
+      modalTrack.style.paddingRight = sidePadPx + 'px';
+      Array.from(modalTrack.children).forEach(slideEl => {
+        slideEl.style.flex = `0 0 ${slideWidthPx}px`;
+      });
+    }
 
     function buildMediaList(project) {
       const images = (project.images || []).map(url => ({ type: 'image', url }));
@@ -124,6 +138,12 @@ function initRender() {
         `<button class="modal__dot" data-idx="${i}" aria-label="Go to item ${i + 1}"></button>`
       ).join('');
 
+      // Modal must be visible (not display:none) before we can measure
+      // modalViewer's real width, so open it first and lay out slides after.
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      layoutSlides();
+
       Array.from(modalTrack.children).forEach((slideEl, i) => {
         slideEl.addEventListener('click', () => {
           if (media[i].type === 'video') playVideoSlide(slideEl, media[i]);
@@ -157,8 +177,6 @@ function initRender() {
       setActiveSlide(0, media);
       const firstSlide = modalTrack.children[0];
       if (firstSlide) firstSlide.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
