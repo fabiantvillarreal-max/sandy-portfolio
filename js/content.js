@@ -40,40 +40,36 @@ window.PORTFOLIO = {
   // For videos: paste YouTube or Vimeo URL in the "video" field
   projects: [
     {
-      id: 1,
       title: "Escribà — AI Creative Direction",
       description: "AI-generated high-end visual assets and brand imagery for Escribà's artisan pastry collections. Photorealistic 8K quality for global campaigns.",
+      content: "AI-generated high-end visual assets and brand imagery for Escribà's artisan pastry collections. Photorealistic 8K quality for global campaigns.",
       category: "AI & Branding",
-      type: "image",
-      image: "images/project-escriba.jpg",
-      video: ""
+      images: ["images/project-escriba.jpg"],
+      videos: []
     },
     {
-      id: 2,
       title: "Immersive Room Installation",
       description: "Interactive multimedia experience designed and produced for an immersive spatial installation.",
+      content: "Interactive multimedia experience designed and produced for an immersive spatial installation.",
       category: "Interactive",
-      type: "video",
-      image: "images/project-inmersiva.jpg",
-      video: "https://www.youtube.com/watch?v=REPLACE_WITH_YOUR_VIDEO_ID"
+      images: ["images/project-inmersiva.jpg"],
+      videos: []
     },
     {
-      id: 3,
       title: "Mini Interactive Experience",
       description: "A self-contained interactive experience — not a game, but an immersive journey through sound, visuals and touch.",
+      content: "A self-contained interactive experience — not a game, but an immersive journey through sound, visuals and touch.",
       category: "Interactive",
-      type: "video",
-      image: "images/project-interactiva.jpg",
-      video: "https://www.youtube.com/watch?v=REPLACE_WITH_YOUR_VIDEO_ID"
+      images: ["images/project-interactiva.jpg"],
+      videos: []
     },
     {
-      id: 4,
       title: "Creative Photography",
       description: "Art direction and creative photography for advertising and editorial campaigns.",
+      content: "Art direction and creative photography for advertising and editorial campaigns.",
       category: "Photography",
-      type: "image",
-      image: "images/project-photo.jpg",
-      video: ""
+      images: ["images/project-photo.jpg"],
+      videos: []
     }
   ],
 
