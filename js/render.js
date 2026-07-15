@@ -15,6 +15,11 @@ function initRender() {
       return url;
     }
 
+    function getYouTubeThumb(url) {
+      const yt = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/);
+      return yt ? `https://img.youtube.com/vi/${yt[1]}/hqdefault.jpg` : '';
+    }
+
     function renderFilters(active) {
       document.getElementById('work-filters').innerHTML = P.categories.map(cat =>
         `<button class="filter-btn ${cat === active ? 'active' : ''}" data-cat="${cat}">${cat}</button>`
@@ -26,12 +31,15 @@ function initRender() {
 
     function renderGrid(active) {
       const list = active === 'All' ? P.projects : P.projects.filter(p => p.category === active);
-      document.getElementById('work-grid').innerHTML = list.map((p, i) => `
+      document.getElementById('work-grid').innerHTML = list.map((p, i) => {
+        const cover = (p.images && p.images[0]) || '';
+        const hasVideo = p.videos && p.videos.length > 0;
+        return `
         <div class="project-card" data-idx="${i}">
           <div class="project-card__media">
-            <img src="${p.image}" alt="${p.title}"
+            <img src="${cover}" alt="${p.title}"
               onerror="this.outerHTML='<div class=\\'placeholder-img\\'>YOUR IMAGE</div>'" />
-            ${p.type === 'video' ? `
+            ${hasVideo ? `
               <div class="project-card__play-icon">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
               </div>` : ''}
@@ -39,37 +47,83 @@ function initRender() {
           <div class="project-card__info">
             <div class="project-card__meta">
               <span class="project-card__category">${p.category}</span>
-              ${p.type === 'video' ? '<span class="project-card__type-badge">Video</span>' : ''}
+              ${hasVideo ? '<span class="project-card__type-badge">Video</span>' : ''}
             </div>
             <h3 class="project-card__title">${p.title}</h3>
             <p class="project-card__desc">${p.description}</p>
           </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
 
       document.querySelectorAll('.project-card').forEach(card => {
         const idx = parseInt(card.dataset.idx);
         const project = list[idx];
-        if (project?.type === 'video') {
-          card.addEventListener('click', () => {
-            const embed = getEmbedUrl(project.video);
-            if (embed) openModal(embed);
-          });
-        }
+        card.addEventListener('click', () => openProjectModal(project));
       });
     }
 
-    const modal = document.getElementById('video-modal');
-    const modalVideo = document.getElementById('modal-video');
+    // ── PROJECT DETAIL MODAL ────────────────────────────
+    const modal = document.getElementById('project-modal');
+    const modalViewer = document.getElementById('modal-viewer');
+    const modalThumbs = document.getElementById('modal-thumbs');
+    const modalTitle = document.getElementById('modal-title');
+    const modalCategory = document.getElementById('modal-category');
+    const modalDescription = document.getElementById('modal-description');
 
-    function openModal(url) {
-      modalVideo.innerHTML = `<iframe src="${url}" allowfullscreen allow="autoplay"></iframe>`;
+    function buildMediaList(project) {
+      const images = (project.images || []).map(url => ({ type: 'image', url }));
+      const videos = (project.videos || []).map(url => ({ type: 'video', url }));
+      return [...images, ...videos];
+    }
+
+    function renderViewer(item) {
+      if (!item) { modalViewer.innerHTML = ''; return; }
+      if (item.type === 'image') {
+        modalViewer.innerHTML = `<img src="${item.url}" alt="" />`;
+      } else {
+        const embed = getEmbedUrl(item.url);
+        modalViewer.innerHTML = embed ? `<iframe src="${embed}" allowfullscreen allow="autoplay"></iframe>` : '';
+      }
+    }
+
+    function openProjectModal(project) {
+      const media = buildMediaList(project);
+
+      modalTitle.textContent = project.title;
+      modalCategory.textContent = project.category;
+      modalDescription.textContent = project.content || project.description || '';
+
+      modalThumbs.innerHTML = media.map((item, i) => {
+        const thumbSrc = item.type === 'image' ? item.url : getYouTubeThumb(item.url);
+        return `
+          <div class="modal__thumb ${i === 0 ? 'active' : ''}" data-idx="${i}">
+            ${thumbSrc ? `<img src="${thumbSrc}" alt="" />` : ''}
+            ${item.type === 'video' ? `
+              <div class="modal__thumb-play-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+              </div>` : ''}
+          </div>
+        `;
+      }).join('');
+
+      document.querySelectorAll('.modal__thumb').forEach(thumb => {
+        thumb.addEventListener('click', () => {
+          const idx = parseInt(thumb.dataset.idx);
+          renderViewer(media[idx]);
+          document.querySelectorAll('.modal__thumb').forEach(t => t.classList.remove('active'));
+          thumb.classList.add('active');
+        });
+      });
+
+      renderViewer(media[0]);
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
+
     function closeModal() {
       modal.classList.remove('open');
-      modalVideo.innerHTML = '';
+      modalViewer.innerHTML = '';
       document.body.style.overflow = '';
     }
 
