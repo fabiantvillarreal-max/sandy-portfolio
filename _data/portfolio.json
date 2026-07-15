@@ -35,7 +35,9 @@
       "description": "AI-generated high-end visual assets and brand imagery for Escribà's artisan pastry collections. Photorealistic 8K quality for global campaigns.",
       "content": "AI-generated high-end visual assets and brand imagery for Escribà's artisan pastry collections. Photorealistic 8K quality for global campaigns.",
       "category": "AI & Branding",
-      "images": ["/images/manzna-roja.jpg"],
+      "images": [
+        "/images/manzna-roja.jpg"
+      ],
       "videos": []
     },
     {
@@ -43,15 +45,22 @@
       "description": "Interactive multimedia experience designed and produced for an immersive spatial installation.",
       "content": "Interactive multimedia experience designed and produced for an immersive spatial installation.",
       "category": "Interactive",
-      "images": ["/images/manzna-roja.jpg"],
-      "videos": ["https://www.youtube.com/watch?v=HXXS9lIErCo&t=153s"]
+      "images": [
+        "/images/manzna-roja.jpg",
+        "/images/manzna-roja.jpg"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=HXXS9lIErCo&t=153s"
+      ]
     },
     {
       "title": "Mini Interactive Experience",
       "description": "A self-contained interactive experience — not a game, but an immersive journey through sound, visuals and touch.",
       "content": "A self-contained interactive experience — not a game, but an immersive journey through sound, visuals and touch.",
       "category": "Interactive",
-      "images": ["images/project-interactiva.jpg"],
+      "images": [
+        "images/project-interactiva.jpg"
+      ],
       "videos": []
     },
     {
@@ -59,7 +68,9 @@
       "description": "Art direction and creative photography for advertising and editorial campaigns.",
       "content": "Art direction and creative photography for advertising and editorial campaigns.",
       "category": "Photography",
-      "images": ["images/project-photo.jpg"],
+      "images": [
+        "images/project-photo.jpg"
+      ],
       "videos": []
     }
   ],
