@@ -34,8 +34,12 @@
     <div class="modal__backdrop" id="modal-backdrop"></div>
     <div class="modal__content">
       <button class="modal__close" id="modal-close">✕</button>
-      <div class="modal__viewer" id="modal-viewer"></div>
-      <div class="modal__thumbs" id="modal-thumbs"></div>
+      <div class="modal__viewer" id="modal-viewer">
+        <div class="modal__track" id="modal-track"></div>
+        <button class="modal__nav modal__nav--prev" id="modal-prev" aria-label="Previous">‹</button>
+        <button class="modal__nav modal__nav--next" id="modal-next" aria-label="Next">›</button>
+      </div>
+      <div class="modal__dots" id="modal-dots"></div>
       <div class="modal__info">
         <div class="modal__meta">
           <h2 class="modal__title" id="modal-title"></h2>

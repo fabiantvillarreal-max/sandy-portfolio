@@ -65,8 +65,10 @@ function initRender() {
 
     // ── PROJECT DETAIL MODAL ────────────────────────────
     const modal = document.getElementById('project-modal');
-    const modalViewer = document.getElementById('modal-viewer');
-    const modalThumbs = document.getElementById('modal-thumbs');
+    const modalTrack = document.getElementById('modal-track');
+    const modalPrev = document.getElementById('modal-prev');
+    const modalNext = document.getElementById('modal-next');
+    const modalDots = document.getElementById('modal-dots');
     const modalTitle = document.getElementById('modal-title');
     const modalCategory = document.getElementById('modal-category');
     const modalDescription = document.getElementById('modal-description');
@@ -77,14 +79,33 @@ function initRender() {
       return [...images, ...videos];
     }
 
-    function renderViewer(item) {
-      if (!item) { modalViewer.innerHTML = ''; return; }
-      if (item.type === 'image') {
-        modalViewer.innerHTML = `<img src="${item.url}" alt="" />`;
-      } else {
-        const embed = getEmbedUrl(item.url);
-        modalViewer.innerHTML = embed ? `<iframe src="${embed}" allowfullscreen allow="autoplay"></iframe>` : '';
-      }
+    function renderSlideContent(item) {
+      if (item.type === 'image') return `<img src="${item.url}" alt="" />`;
+      const thumb = getYouTubeThumb(item.url);
+      return `${thumb ? `<img src="${thumb}" alt="" />` : ''}
+        <div class="modal__slide-play-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+        </div>`;
+    }
+
+    function playVideoSlide(slideEl, item) {
+      const embed = getEmbedUrl(item.url);
+      if (embed) slideEl.innerHTML = `<iframe src="${embed}" allowfullscreen allow="autoplay"></iframe>`;
+    }
+
+    function setActiveSlide(index, media) {
+      modal.dataset.activeIdx = index;
+      modalPrev.disabled = index === 0;
+      modalNext.disabled = index === media.length - 1;
+      Array.from(modalTrack.children).forEach((slideEl, i) => slideEl.classList.toggle('active', i === index));
+      modalDots.querySelectorAll('.modal__dot').forEach((dot, i) => dot.classList.toggle('active', i === index));
+    }
+
+    function goToSlide(index, media) {
+      const clamped = Math.max(0, Math.min(index, media.length - 1));
+      const slideEl = modalTrack.children[clamped];
+      if (slideEl) slideEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      setActiveSlide(clamped, media);
     }
 
     function openProjectModal(project) {
@@ -94,36 +115,54 @@ function initRender() {
       modalCategory.textContent = project.category;
       modalDescription.textContent = project.content || project.description || '';
 
-      modalThumbs.innerHTML = media.map((item, i) => {
-        const thumbSrc = item.type === 'image' ? item.url : getYouTubeThumb(item.url);
-        return `
-          <div class="modal__thumb ${i === 0 ? 'active' : ''}" data-idx="${i}">
-            ${thumbSrc ? `<img src="${thumbSrc}" alt="" />` : ''}
-            ${item.type === 'video' ? `
-              <div class="modal__thumb-play-icon">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
-              </div>` : ''}
-          </div>
-        `;
-      }).join('');
+      modalTrack.innerHTML = media.map((item, i) =>
+        `<div class="modal__slide" data-idx="${i}">${renderSlideContent(item)}</div>`
+      ).join('');
 
-      document.querySelectorAll('.modal__thumb').forEach(thumb => {
-        thumb.addEventListener('click', () => {
-          const idx = parseInt(thumb.dataset.idx);
-          renderViewer(media[idx]);
-          document.querySelectorAll('.modal__thumb').forEach(t => t.classList.remove('active'));
-          thumb.classList.add('active');
+      modalDots.innerHTML = media.map((_, i) =>
+        `<button class="modal__dot" data-idx="${i}" aria-label="Go to item ${i + 1}"></button>`
+      ).join('');
+
+      Array.from(modalTrack.children).forEach((slideEl, i) => {
+        slideEl.addEventListener('click', () => {
+          if (media[i].type === 'video') playVideoSlide(slideEl, media[i]);
+          goToSlide(i, media);
         });
       });
 
-      renderViewer(media[0]);
+      modalDots.querySelectorAll('.modal__dot').forEach(dot => {
+        dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.idx), media));
+      });
+
+      modalPrev.onclick = () => goToSlide(parseInt(modal.dataset.activeIdx) - 1, media);
+      modalNext.onclick = () => goToSlide(parseInt(modal.dataset.activeIdx) + 1, media);
+
+      let scrollTimeout;
+      modalTrack.onscroll = () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          const trackRect = modalTrack.getBoundingClientRect();
+          const center = trackRect.left + trackRect.width / 2;
+          let closest = 0, closestDist = Infinity;
+          Array.from(modalTrack.children).forEach((slideEl, i) => {
+            const r = slideEl.getBoundingClientRect();
+            const dist = Math.abs((r.left + r.width / 2) - center);
+            if (dist < closestDist) { closestDist = dist; closest = i; }
+          });
+          setActiveSlide(closest, media);
+        }, 120);
+      };
+
+      setActiveSlide(0, media);
+      const firstSlide = modalTrack.children[0];
+      if (firstSlide) firstSlide.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
       modal.classList.remove('open');
-      modalViewer.innerHTML = '';
+      modalTrack.innerHTML = '';
       document.body.style.overflow = '';
     }
 
