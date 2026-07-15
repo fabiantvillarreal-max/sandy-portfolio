@@ -80,7 +80,8 @@ function initRender() {
     }
 
     function renderSlideContent(item) {
-      if (item.type === 'image') return `<img src="${item.url}" alt="" />`;
+      if (item.type === 'image') return `<img src="${item.url}" alt=""
+        onerror="this.outerHTML='<div class=\\'placeholder-img\\'>YOUR IMAGE</div>'" />`;
       const thumb = getYouTubeThumb(item.url);
       return `${thumb ? `<img src="${thumb}" alt="" />` : ''}
         <div class="modal__slide-play-icon">
@@ -95,8 +96,8 @@ function initRender() {
 
     function setActiveSlide(index, media) {
       modal.dataset.activeIdx = index;
-      modalPrev.disabled = index === 0;
-      modalNext.disabled = index === media.length - 1;
+      modalPrev.disabled = media.length < 2 || index === 0;
+      modalNext.disabled = media.length < 2 || index === media.length - 1;
       Array.from(modalTrack.children).forEach((slideEl, i) => slideEl.classList.toggle('active', i === index));
       modalDots.querySelectorAll('.modal__dot').forEach((dot, i) => dot.classList.toggle('active', i === index));
     }
