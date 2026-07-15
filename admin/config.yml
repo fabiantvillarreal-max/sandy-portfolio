@@ -56,13 +56,14 @@ collections:
             label_singular: Proyecto
             fields:
               - { label: Título, name: title, widget: string }
-              - { label: Descripción, name: description, widget: text }
+              - { label: Descripción corta (tarjeta), name: description, widget: text }
+              - { label: Descripción detallada (pop-up), name: content, widget: text, required: false, default: "" }
               - { label: Categoría, name: category, widget: string }
-              - label: Tipo
-                name: type
-                widget: select
-                options:
-                  - { label: Imagen, value: image }
-                  - { label: Video, value: video }
-              - { label: Imagen del proyecto, name: image, widget: image }
-              - { label: "URL del video (YouTube o Vimeo)", name: video, widget: string, required: false, default: "" }
+              - label: Imágenes del proyecto
+                name: images
+                widget: list
+                field: { label: Imagen, name: image, widget: image }
+              - label: Videos del proyecto (YouTube o Vimeo)
+                name: videos
+                widget: list
+                field: { label: URL del video, name: video, widget: string }
