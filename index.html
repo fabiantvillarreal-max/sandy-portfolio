@@ -31,9 +31,11 @@
   </div>
 
   <div class="modal" id="project-modal">
-    <div class="modal__backdrop" id="modal-backdrop"></div>
+    <div class="modal__topbar">
+      <button class="modal__back" id="modal-back" type="button">&larr; back to work</button>
+      <span class="modal__esc-hint">ESC</span>
+    </div>
     <div class="modal__content">
-      <button class="modal__close" id="modal-close">✕</button>
       <div class="modal__viewer" id="modal-viewer">
         <div class="modal__track" id="modal-track"></div>
         <button class="modal__nav modal__nav--prev" id="modal-prev" aria-label="Previous">‹</button>
@@ -45,6 +47,7 @@
           <h2 class="modal__title" id="modal-title"></h2>
           <span class="modal__category" id="modal-category"></span>
         </div>
+        <p class="modal__section-label">Overview</p>
         <p class="modal__description" id="modal-description"></p>
       </div>
     </div>

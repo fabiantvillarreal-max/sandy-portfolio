@@ -141,7 +141,7 @@ function initRender() {
       // Modal must be visible (not display:none) before we can measure
       // modalViewer's real width, so open it first and lay out slides after.
       modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('modal-open');
       layoutSlides();
 
       Array.from(modalTrack.children).forEach((slideEl, i) => {
@@ -182,11 +182,10 @@ function initRender() {
     function closeModal() {
       modal.classList.remove('open');
       modalTrack.innerHTML = '';
-      document.body.style.overflow = '';
+      document.body.classList.remove('modal-open');
     }
 
-    document.getElementById('modal-close').addEventListener('click', closeModal);
-    document.getElementById('modal-backdrop').addEventListener('click', closeModal);
+    document.getElementById('modal-back').addEventListener('click', closeModal);
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
     renderFilters('All');
