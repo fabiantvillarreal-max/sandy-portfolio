@@ -64,12 +64,12 @@
       "videos": []
     },
     {
-      "title": "Creative Photography",
-      "description": "Art direction and creative photography for advertising and editorial campaigns.",
-      "content": "Art direction and creative photography for advertising and editorial campaigns.",
+      "title": "Studio46",
+      "description": "Photography for Studio 46, Barcelona",
+      "content": "Project Overview\nStudio 46 approached me to create a series of photographs that could capture the character of the space while visitors experienced a guided tour. Located in a historic family home in Barcelona’s Gràcia neighbourhood, the studio brings together architecture, printmaking, contemporary art and decades of artistic heritage.\n\nThe images were created for the studio’s website and digital communication, with the aim of presenting not only the artworks, but also the atmosphere, history and unique details visitors encounter throughout the space.",
       "category": "Photography",
       "images": [
-        "images/project-photo.jpg"
+        "/images/cortada.jpg"
       ],
       "videos": []
     }
