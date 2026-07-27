@@ -57,9 +57,18 @@ collections:
             fields:
               - { label: Título, name: title, widget: string }
               - { label: Descripción corta (tarjeta), name: description, widget: text }
-              - { label: Descripción detallada (pop-up), name: content, widget: text, required: false, default: "" }
+              - { label: Descripción detallada (pop-up, "Project Overview"), name: content, widget: text, required: false, default: "" }
               - { label: Categoría, name: category, widget: string }
-              - label: Imágenes del proyecto
+              - { label: Cliente, name: client, widget: string, required: false, default: "" }
+              - { label: Rol, name: role, widget: string, required: false, default: "" }
+              - { label: Año, name: year, widget: string, required: false, default: "" }
+              - { label: Mi enfoque ("My Approach"), name: approach, widget: text, required: false, default: "" }
+              - label: Entregables clave ("Key Deliverables")
+                name: deliverables
+                widget: list
+                required: false
+                field: { label: Entregable, name: deliverable, widget: string }
+              - label: "Imágenes del proyecto (la 1ª es la imagen grande principal, el resto forman la galería)"
                 name: images
                 widget: list
                 field: { label: Imagen, name: image, widget: image }

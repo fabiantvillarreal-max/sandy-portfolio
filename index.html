@@ -32,24 +32,47 @@
 
   <div class="modal" id="project-modal">
     <div class="modal__topbar">
-      <button class="modal__back" id="modal-back" type="button">&larr; back to work</button>
-      <span class="modal__esc-hint">ESC</span>
+      <button class="modal__back" id="modal-back" type="button">&lt;!-- Back to all Works</button>
     </div>
     <div class="modal__content">
-      <div class="modal__viewer" id="modal-viewer">
-        <div class="modal__track" id="modal-track"></div>
-        <button class="modal__nav modal__nav--prev" id="modal-prev" aria-label="Previous">‹</button>
-        <button class="modal__nav modal__nav--next" id="modal-next" aria-label="Next">›</button>
-      </div>
-      <div class="modal__dots" id="modal-dots"></div>
-      <div class="modal__info">
-        <div class="modal__meta">
-          <h2 class="modal__title" id="modal-title"></h2>
-          <span class="modal__category" id="modal-category"></span>
+      <h1 class="modal__title" id="modal-title"></h1>
+
+      <p class="modal__comment">&lt;!-- work info --&gt;</p>
+      <div class="modal__meta-grid">
+        <div class="modal__meta-col">
+          <span class="modal__meta-label">Client:</span>
+          <span class="modal__meta-value" id="modal-client"></span>
         </div>
-        <p class="modal__section-label">Overview</p>
-        <p class="modal__description" id="modal-description"></p>
+        <div class="modal__meta-col">
+          <span class="modal__meta-label">Role:</span>
+          <span class="modal__meta-value" id="modal-role"></span>
+        </div>
+        <div class="modal__meta-col">
+          <span class="modal__meta-label">Year:</span>
+          <span class="modal__meta-value" id="modal-year"></span>
+        </div>
       </div>
+
+      <div class="modal__hero" id="modal-hero"></div>
+
+      <div class="modal__body">
+        <section class="modal__section" id="modal-section-overview">
+          <h2 class="modal__section-heading">Project Overview</h2>
+          <div class="modal__section-text" id="modal-overview"></div>
+        </section>
+        <section class="modal__section" id="modal-section-approach">
+          <h2 class="modal__section-heading">My Approach</h2>
+          <div class="modal__section-text" id="modal-approach"></div>
+        </section>
+        <section class="modal__section" id="modal-section-deliverables">
+          <h2 class="modal__section-heading">Key Deliverables</h2>
+          <ul class="modal__deliverables" id="modal-deliverables"></ul>
+        </section>
+      </div>
+
+      <div class="modal__gallery" id="modal-gallery"></div>
+
+      <button class="modal__see-more" id="modal-see-more" type="button">See more projects</button>
     </div>
   </div>
 

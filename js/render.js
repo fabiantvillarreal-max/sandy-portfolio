@@ -60,133 +60,81 @@ function initRender() {
     }
 
     // ── PROJECT DETAIL MODAL ────────────────────────────
-    const SLIDE_WIDTH_RATIO = 0.68; // active slide's width as a fraction of the viewer
-
     const modal = document.getElementById('project-modal');
-    const modalViewer = document.getElementById('modal-viewer');
-    const modalTrack = document.getElementById('modal-track');
-    const modalPrev = document.getElementById('modal-prev');
-    const modalNext = document.getElementById('modal-next');
-    const modalDots = document.getElementById('modal-dots');
     const modalTitle = document.getElementById('modal-title');
-    const modalCategory = document.getElementById('modal-category');
-    const modalDescription = document.getElementById('modal-description');
+    const modalClient = document.getElementById('modal-client');
+    const modalRole = document.getElementById('modal-role');
+    const modalYear = document.getElementById('modal-year');
+    const modalHero = document.getElementById('modal-hero');
+    const modalOverview = document.getElementById('modal-overview');
+    const modalApproach = document.getElementById('modal-approach');
+    const modalDeliverables = document.getElementById('modal-deliverables');
+    const modalGallery = document.getElementById('modal-gallery');
+    const modalSeeMore = document.getElementById('modal-see-more');
 
-    // Sizes slides and side padding in real pixels (not %) so the flex-basis
-    // and padding are computed against the same box — percentages for both
-    // would be resolved against different boxes (padding shrinks the content
-    // box flex-basis% is measured against), throwing off centering.
-    function layoutSlides() {
-      const viewerWidth = modalViewer.clientWidth;
-      const slideWidthPx = Math.round(viewerWidth * SLIDE_WIDTH_RATIO);
-      const sidePadPx = Math.round((viewerWidth - slideWidthPx) / 2);
-      modalTrack.style.paddingLeft = sidePadPx + 'px';
-      modalTrack.style.paddingRight = sidePadPx + 'px';
-      Array.from(modalTrack.children).forEach(slideEl => {
-        slideEl.style.flex = `0 0 ${slideWidthPx}px`;
-      });
+    function renderParagraphs(el, text) {
+      el.innerHTML = (text || '')
+        .split(/\n\s*\n/)
+        .filter(p => p.trim())
+        .map(p => `<p>${p}</p>`)
+        .join('');
     }
 
-    function buildMediaList(project) {
-      const images = (project.images || []).map(url => ({ type: 'image', url }));
-      const videos = (project.videos || []).map(url => ({ type: 'video', url }));
-      return [...images, ...videos];
-    }
-
-    function renderSlideContent(item) {
-      if (item.type === 'image') return `<img src="${item.url}" alt=""
+    function imgTag(url) {
+      return `<img src="${url}" alt=""
         onerror="this.outerHTML='<div class=\\'placeholder-img\\'>YOUR IMAGE</div>'" />`;
-      const thumb = getYouTubeThumb(item.url);
-      return `${thumb ? `<img src="${thumb}" alt="" />` : ''}
-        <div class="modal__slide-play-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
-        </div>`;
-    }
-
-    function playVideoSlide(slideEl, item) {
-      const embed = getEmbedUrl(item.url);
-      if (embed) slideEl.innerHTML = `<iframe src="${embed}" allowfullscreen allow="autoplay"></iframe>`;
-    }
-
-    function setActiveSlide(index, media) {
-      modal.dataset.activeIdx = index;
-      modalPrev.disabled = media.length < 2 || index === 0;
-      modalNext.disabled = media.length < 2 || index === media.length - 1;
-      Array.from(modalTrack.children).forEach((slideEl, i) => slideEl.classList.toggle('active', i === index));
-      modalDots.querySelectorAll('.modal__dot').forEach((dot, i) => dot.classList.toggle('active', i === index));
-    }
-
-    function goToSlide(index, media) {
-      const clamped = Math.max(0, Math.min(index, media.length - 1));
-      const slideEl = modalTrack.children[clamped];
-      if (slideEl) slideEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      setActiveSlide(clamped, media);
     }
 
     function openProjectModal(project) {
-      const media = buildMediaList(project);
+      const images = project.images || [];
+      const videos = project.videos || [];
+      const [heroUrl, ...galleryImages] = images;
 
       modalTitle.textContent = project.title;
-      modalCategory.textContent = project.category;
-      modalDescription.textContent = project.content || project.description || '';
+      modalClient.textContent = project.client || '';
+      modalRole.textContent = project.role || '';
+      modalYear.textContent = project.year || '';
 
-      modalTrack.innerHTML = media.map((item, i) =>
-        `<div class="modal__slide" data-idx="${i}">${renderSlideContent(item)}</div>`
-      ).join('');
+      modalHero.innerHTML = heroUrl ? imgTag(heroUrl) : `<div class="placeholder-img">YOUR IMAGE</div>`;
 
-      modalDots.innerHTML = media.map((_, i) =>
-        `<button class="modal__dot" data-idx="${i}" aria-label="Go to item ${i + 1}"></button>`
-      ).join('');
+      renderParagraphs(modalOverview, project.content || project.description || '');
+      document.getElementById('modal-section-overview').style.display = modalOverview.innerHTML ? '' : 'none';
 
-      // Modal must be visible (not display:none) before we can measure
-      // modalViewer's real width, so open it first and lay out slides after.
+      renderParagraphs(modalApproach, project.approach || '');
+      document.getElementById('modal-section-approach').style.display = modalApproach.innerHTML ? '' : 'none';
+
+      const deliverables = project.deliverables || [];
+      modalDeliverables.innerHTML = deliverables.map(d => `<li>${d}</li>`).join('');
+      document.getElementById('modal-section-deliverables').style.display = deliverables.length ? '' : 'none';
+
+      const galleryItems = [
+        ...galleryImages.map(url => `<div class="modal__gallery-item">${imgTag(url)}</div>`),
+        ...videos.map(url => {
+          const thumb = getYouTubeThumb(url);
+          return `<a class="modal__gallery-item modal__gallery-item--video" href="${url}" target="_blank" rel="noopener">
+            ${thumb ? `<img src="${thumb}" alt="" />` : ''}
+            <div class="modal__slide-play-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </a>`;
+        })
+      ];
+      modalGallery.innerHTML = galleryItems.join('');
+      modalGallery.style.display = galleryItems.length ? '' : 'none';
+
       modal.classList.add('open');
       document.body.classList.add('modal-open');
-      layoutSlides();
-
-      Array.from(modalTrack.children).forEach((slideEl, i) => {
-        slideEl.addEventListener('click', () => {
-          if (media[i].type === 'video') playVideoSlide(slideEl, media[i]);
-          goToSlide(i, media);
-        });
-      });
-
-      modalDots.querySelectorAll('.modal__dot').forEach(dot => {
-        dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.idx), media));
-      });
-
-      modalPrev.onclick = () => goToSlide(parseInt(modal.dataset.activeIdx) - 1, media);
-      modalNext.onclick = () => goToSlide(parseInt(modal.dataset.activeIdx) + 1, media);
-
-      let scrollTimeout;
-      modalTrack.onscroll = () => {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          const trackRect = modalTrack.getBoundingClientRect();
-          const center = trackRect.left + trackRect.width / 2;
-          let closest = 0, closestDist = Infinity;
-          Array.from(modalTrack.children).forEach((slideEl, i) => {
-            const r = slideEl.getBoundingClientRect();
-            const dist = Math.abs((r.left + r.width / 2) - center);
-            if (dist < closestDist) { closestDist = dist; closest = i; }
-          });
-          setActiveSlide(closest, media);
-        }, 120);
-      };
-
-      setActiveSlide(0, media);
-      const firstSlide = modalTrack.children[0];
-      if (firstSlide) firstSlide.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+      modal.scrollTop = 0;
     }
 
     function closeModal() {
       modal.classList.remove('open');
-      modalTrack.innerHTML = '';
       document.body.classList.remove('modal-open');
     }
 
     document.getElementById('modal-back').addEventListener('click', closeModal);
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+    modalSeeMore.addEventListener('click', closeModal);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
 
     renderFilters('All');
     renderGrid('All');

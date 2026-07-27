@@ -44,6 +44,16 @@ window.PORTFOLIO = {
       description: "AI-generated high-end visual assets and brand imagery for Escribà's artisan pastry collections. Photorealistic 8K quality for global campaigns.",
       content: "AI-generated high-end visual assets and brand imagery for Escribà's artisan pastry collections. Photorealistic 8K quality for global campaigns.",
       category: "AI & Branding",
+      client: "Escribà, Barcelona",
+      role: "AI Creative Director",
+      year: "2025",
+      approach: "I combined AI image generation with careful art direction to keep every render on-brand — matching Escribà's real product textures, packaging and studio lighting so the final images could sit next to traditional photography without looking out of place.\n\nEach visual went through multiple generation and retouching passes, refining composition, color and detail until the output reached campaign-ready quality.",
+      deliverables: [
+        "AI-generated product photography",
+        "Campaign key visuals",
+        "Brand imagery for digital & print",
+        "Style-guide consistent renders"
+      ],
       images: ["images/project-escriba.jpg"],
       videos: []
     },
@@ -52,6 +62,16 @@ window.PORTFOLIO = {
       description: "Interactive multimedia experience designed and produced for an immersive spatial installation.",
       content: "Interactive multimedia experience designed and produced for an immersive spatial installation.",
       category: "Interactive",
+      client: "La Salle Barcelona",
+      role: "Creative Technologist",
+      year: "2025",
+      approach: "I designed the spatial and interaction logic first, then layered visuals and sound on top so the room would react naturally to how people moved through it, rather than feeling like a fixed playback loop.\n\nTesting happened directly in the space with real visitors, adjusting sensitivity and timing until the experience felt immediate and intuitive.",
+      deliverables: [
+        "Interactive spatial installation",
+        "Real-time visual & audio system",
+        "Sensor-driven interaction design",
+        "On-site technical setup"
+      ],
       images: ["images/project-inmersiva.jpg"],
       videos: []
     },
@@ -60,6 +80,16 @@ window.PORTFOLIO = {
       description: "A self-contained interactive experience — not a game, but an immersive journey through sound, visuals and touch.",
       content: "A self-contained interactive experience — not a game, but an immersive journey through sound, visuals and touch.",
       category: "Interactive",
+      client: "Personal project",
+      role: "Experience Designer",
+      year: "2025",
+      approach: "Rather than building toward objectives or scores, I focused on mood and pacing — letting sound, visuals and touch guide the visitor through the piece at their own rhythm.\n\nThe result is closer to a short, contained journey than a game: something meant to be felt rather than won.",
+      deliverables: [
+        "Interactive audiovisual experience",
+        "Touch-based interaction design",
+        "Sound design & composition",
+        "Visual direction"
+      ],
       images: ["images/project-interactiva.jpg"],
       videos: []
     },
@@ -68,6 +98,16 @@ window.PORTFOLIO = {
       description: "Art direction and creative photography for advertising and editorial campaigns.",
       content: "Art direction and creative photography for advertising and editorial campaigns.",
       category: "Photography",
+      client: "Editorial & advertising clients",
+      role: "Photographer",
+      year: "2025",
+      approach: "I built each shoot around a clear visual concept first, then worked closely with stylists and art directors on set to keep composition, light and color true to that concept from the first frame to the final edit.\n\nThe goal throughout was images that hold up both as standalone editorial pieces and as part of a larger campaign.",
+      deliverables: [
+        "Art direction & concept development",
+        "Studio & on-location photography",
+        "Editorial and advertising imagery",
+        "Post-production & retouching"
+      ],
       images: ["images/project-photo.jpg"],
       videos: []
     }
