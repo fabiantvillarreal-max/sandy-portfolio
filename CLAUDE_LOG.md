@@ -80,3 +80,88 @@ Files touched:
 - _data/portfolio.json
 - js/content.js
 - admin/config.yml
+
+## 2026-07-27 (session continued)
+Agent: Claude
+Objective: Commit and deploy the new popup redesign so the user could see it live and test /admin editing.
+
+Changes:
+- Committed the redesign (`07b7e99`).
+- `git push origin master` was rejected: `origin/master` had 5 commits ahead (`Update Portfolio "info"` — Decap CMS auto-commits from someone editing via `/admin`) that weren't in the local branch.
+- Diffed `4192995..origin/master`: those commits uploaded 4 real images (`images/2-01.jpg`, `images/cortada.jpg`, `images/studio.jpg`, `images/whatsapp-image-2025-10-05-at-8.57.51-pm.jpeg`), changed the site heroImage and Escribà's project image to real photos, and — importantly — replaced the old "Creative Photography" 4th project with a **real Studio 46 project** (title, description, images), with the entire PDF case-study text pasted as one blob into the single `content` field (CMS didn't have the new approach/deliverables fields yet at the time it was saved).
+- `git merge origin/master` auto-merged cleanly at the Git level but produced a semantically wrong result: it kept the new Studio 46 title/images from remote but paired them with the *old placeholder* `client`/`role`/`approach`/`deliverables` text (from the "Creative Photography" slot my commit had added fields to). Manually fixed `_data/portfolio.json`: split the pasted blob into `content` (Project Overview only) / `approach` (My Approach) / `deliverables` (Key Deliverables as a list), and set `client: "Studio 46, Barcelona"`, `role: "Photographer"`, `year: "2026"` to match the PDF. Title normalized `"Studio46"` → `"Studio 46"`.
+- Committed the fix (`72f68e7`) and pushed both commits to `origin/master` successfully.
+- Cleaned up one stray empty file (`console.log(p.title`) accidentally created by a shell quoting issue in an inline `node -e` diagnostic command — deleted before committing (never staged).
+
+Validation:
+- `node -e "JSON.parse(...)"` on `_data/portfolio.json` after the manual fix → valid JSON.
+- `git push origin master` → succeeded (`da04635..72f68e7`).
+
+Open issues:
+- `js/content.js` (the `file://` fallback) still has the old placeholder "Creative Photography" 4th project — now out of sync with the real `_data/portfolio.json` Studio 46 entry. Not user-facing on the deployed site (which fetches `portfolio.json`), but worth syncing next time content.js is touched.
+- Anyone editing via `/admin` again before a local pull will recreate the same rejected-push situation — always `git fetch`/diff `origin/master` before assuming local is current.
+
+Next step:
+- Confirm the live Netlify deploy shows the new popup correctly with the real Studio 46 images once the build finishes.
+- Optionally sync `js/content.js`'s demo project list to match reality (cosmetic, low priority).
+
+Files touched:
+- _data/portfolio.json
+
+## 2026-07-27 (session continued 2)
+Agent: Claude
+Objective: User reported real uploaded photos looked bad in the main "work" grid cards — the `object-fit: contain` fix from 2026-07-20 had been lost during the 07-27 popup redesign (cards were back to `object-fit: cover`, cropping images whose ratio doesn't match 4:3). User wanted bigger cards plus photos that never crop.
+
+Changes:
+- `css/style.css`: `.work__grid` desktop columns changed `repeat(3, 1fr)` → `repeat(2, 1fr)` (bigger cards); removed the now-redundant `@media (max-width: 1100px)` rule that used to force 2 columns (tablet/mobile breakpoints at 1100px/768px unaffected). Re-added `object-fit: contain` to `.project-card__media img` so photos always show whole, never cropped (existing `background: var(--surface)` on the container fills any letterbox space).
+- Scope confirmed with user: main work grid only, not the popup's hero/gallery images.
+
+Validation:
+- Ad-hoc Playwright (installed in scratchpad temp dir) against `python -m http.server 5757` serving the real site: desktop (1440px) grid computes 2 equal columns, `object-fit: contain` confirmed on card images, screenshot shows the apple photo and Studio 46 photo both rendering fully uncropped; mobile (375px) still single column, unchanged. Only console output was one expected 404 (pre-existing placeholder path), no page errors.
+
+Open issues:
+- None blocking. Same pre-existing minor items as prior entries (content.js demo data out of sync, /admin push-then-pull hazard).
+
+Next step:
+- None required for this change. Watch out that future edits to `.project-card__media img` or the popup redesign don't silently drop `object-fit: contain` again (it's happened once already).
+
+Files touched:
+- css/style.css
+
+## 2026-07-27 (session continued 3)
+Agent: Claude
+Objective: User viewed the local dev server and disliked the letterbox margins left by `object-fit: contain` on cards whose photo ratio isn't exactly 4:3. Fixed by making each card adapt to its own photo's natural aspect ratio instead of a fixed 4:3 box.
+
+Changes:
+- `css/style.css`: `.work__grid` gains `align-items: start` (so cards don't stretch to match the tallest card in their row, enabling uneven/masonry-style card heights). `.project-card__media` drops `aspect-ratio: 4/3`. `.project-card__media img` changed `height: 100%` → `height: auto` and dropped `object-fit: contain` (no longer needed — box now equals the image's own ratio, nothing to crop or letterbox). `.placeholder-img` (the "YOUR IMAGE" fallback shown on broken/missing image) switched from `height: 100%` (relied on parent's now-removed fixed height) to its own `aspect-ratio: 4/3` so it still renders a sensible box when there's no real photo.
+
+Validation:
+- Re-ran the ad-hoc Playwright screenshot script against the local server: desktop (1440px) shows 2 varied-height cards per row with photos filling edge-to-edge, no colored letterbox bars; the placeholder-only card still renders a normal 4:3 gray box. Mobile (375px) same behavior, still 1 column. No new console/page errors.
+
+Open issues:
+- None blocking. Grid rows are no longer visually aligned row-to-row (masonry look) — this was the explicit trade-off the user chose over letterboxing.
+
+Next step:
+- None required. Local dev server (`python -m http.server 5757`) was left running at user's request so they can view it directly; stop it once they're done reviewing, then commit if approved.
+
+Files touched:
+- css/style.css
+
+## 2026-07-27 (session continued 4)
+Agent: Claude
+Objective: User didn't want uneven (masonry) row heights either — wanted rows to line up by having the shorter card's black info block grow to match its row partner's total height, while the photo itself keeps its natural, uncropped ratio.
+
+Changes:
+- `css/style.css`: reverted `.work__grid`'s `align-items: start` (removed) so grid rows go back to default stretch — each `.project-card` in a row now equals the row's tallest card. `.project-card` is now `display: flex; flex-direction: column;` so it can distribute that stretched height between its children. `.project-card__media` got `flex-shrink: 0` so the photo always keeps its natural/intrinsic height (never squeezed). `.project-card__info` got `flex: 1; justify-content: center;` so it's the block that absorbs the extra height when its row partner has a taller photo, with its title/description vertically centered in the extra space instead of pinned to the top.
+
+Validation:
+- Re-ran the Playwright screenshot script against the local server (already running from prior step): desktop (1440px) — the Escribà card (short/wide banner photo) and the apple card (tall photo) are now in one row with equal total card height; Escribà's black info block visibly grew and its text is vertically centered to fill the difference. Same pattern confirmed for the second row (placeholder vs. Studio 46 photo). Mobile (375px) unaffected (1 column, no row-pairing to reconcile). No new console/page errors.
+
+Open issues:
+- None blocking.
+
+Next step:
+- User is reviewing on the local server; once approved, commit `css/style.css` and push (Netlify auto-deploys from master).
+
+Files touched:
+- css/style.css
