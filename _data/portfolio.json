@@ -31,77 +31,71 @@
   "title": "Multidisciplinary Designer",
   "projects": [
     {
-      "title": "Escribà — AI Creative Direction",
-      "description": "AI-generated high-end visual assets and brand imagery for Escribà's artisan pastry collections. Photorealistic 8K quality for global campaigns.",
-      "content": "AI-generated high-end visual assets and brand imagery for Escribà's artisan pastry collections. Photorealistic 8K quality for global campaigns.",
-      "category": "AI & Branding",
-      "client": "Escribà, Barcelona",
-      "role": "AI Creative Director",
-      "year": "2025",
       "approach": "I combined AI image generation with careful art direction to keep every render on-brand — matching Escribà's real product textures, packaging and studio lighting so the final images could sit next to traditional photography without looking out of place.\n\nEach visual went through multiple generation and retouching passes, refining composition, color and detail until the output reached campaign-ready quality.",
+      "client": "Escribà, Barcelona",
       "deliverables": [
         "AI-generated product photography",
         "Campaign key visuals",
         "Brand imagery for digital & print",
         "Style-guide consistent renders"
       ],
+      "role": "AI Creative Director",
+      "title": "Escribà — AI Creative Direction",
       "images": [
         "/images/2-01.jpg"
       ],
-      "videos": []
+      "videos": [],
+      "content": "AI-generated high-end visual assets and brand imagery for Escribà's artisan pastry collections. Photorealistic 8K quality for global campaigns.",
+      "description": "AI-generated high-end visual assets and brand imagery for Escribà's artisan pastry collections. Photorealistic 8K quality for global campaigns.",
+      "year": "2025",
+      "category": "AI & Branding"
     },
     {
-      "title": "Immersive Room Installation",
-      "description": "Interactive multimedia experience designed and produced for an immersive spatial installation.",
-      "content": "Interactive multimedia experience designed and produced for an immersive spatial installation.",
-      "category": "Interactive",
-      "client": "La Salle Barcelona",
-      "role": "Creative Technologist",
-      "year": "2025",
       "approach": "I designed the spatial and interaction logic first, then layered visuals and sound on top so the room would react naturally to how people moved through it, rather than feeling like a fixed playback loop.\n\nTesting happened directly in the space with real visitors, adjusting sensitivity and timing until the experience felt immediate and intuitive.",
+      "client": "La Salle Barcelona",
       "deliverables": [
         "Interactive spatial installation",
         "Real-time visual & audio system",
         "Sensor-driven interaction design",
         "On-site technical setup"
       ],
+      "role": "Creative Technologist",
+      "title": "Immersive Room Installation",
       "images": [
         "/images/manzna-roja.jpg",
         "/images/manzna-roja.jpg"
       ],
       "videos": [
         "https://www.youtube.com/watch?v=HXXS9lIErCo&t=153s"
-      ]
+      ],
+      "content": "Interactive multimedia experience designed and produced for an immersive spatial installation.",
+      "description": "Interactive multimedia experience designed and produced for an immersive spatial installation.",
+      "year": "2025",
+      "category": "Interactive"
     },
     {
-      "title": "Mini Interactive Experience",
-      "description": "A self-contained interactive experience — not a game, but an immersive journey through sound, visuals and touch.",
-      "content": "A self-contained interactive experience — not a game, but an immersive journey through sound, visuals and touch.",
-      "category": "Interactive",
-      "client": "Personal project",
-      "role": "Experience Designer",
-      "year": "2025",
       "approach": "Rather than building toward objectives or scores, I focused on mood and pacing — letting sound, visuals and touch guide the visitor through the piece at their own rhythm.\n\nThe result is closer to a short, contained journey than a game: something meant to be felt rather than won.",
+      "client": "Personal project",
       "deliverables": [
         "Interactive audiovisual experience",
         "Touch-based interaction design",
         "Sound design & composition",
         "Visual direction"
       ],
+      "role": "Experience Designer",
+      "title": "Mini Interactive Experience",
       "images": [
         "images/project-interactiva.jpg"
       ],
-      "videos": []
+      "videos": [],
+      "content": "A self-contained interactive experience — not a game, but an immersive journey through sound, visuals and touch.",
+      "description": "A self-contained interactive experience — not a game, but an immersive journey through sound, visuals and touch.",
+      "year": "2025",
+      "category": "Interactive"
     },
     {
-      "title": "Studio 46",
-      "description": "Photography for Studio 46, Barcelona",
-      "content": "Studio 46 approached me to create a series of photographs that could capture the character of the space while visitors experienced a guided tour. Located in a historic family home in Barcelona’s Gràcia neighbourhood, the studio brings together architecture, printmaking, contemporary art and decades of artistic heritage.\n\nThe images were created for the studio’s website and digital communication, with the aim of presenting not only the artworks, but also the atmosphere, history and unique details visitors encounter throughout the space.",
-      "category": "Photography",
-      "client": "Studio 46, Barcelona",
-      "role": "Photographer",
-      "year": "2026",
       "approach": "I followed the tour as it naturally unfolded, documenting the interaction between the visitors, the artworks and the studio itself. Rather than staging every moment, we focused on authentic reactions, movement and spontaneous details.\n\nThe photography explored the different areas of Studio 46—from its gallery rooms and original architectural features to its printing presses, tools and working spaces. The visual direction combined wider environmental shots with close-up details to communicate the studio’s intimate, lived-in character and its connection to generations of artists.",
+      "client": "Studio 46, Barcelona",
       "deliverables": [
         "Guided-tour and visitor photography",
         "Interior and architectural images",
@@ -110,11 +104,18 @@
         "Website and digital-content photography",
         "Visual documentation of the studio’s creative process"
       ],
+      "role": "Photographer",
+      "title": "Studio 46",
       "images": [
         "/images/cortada.jpg",
-        "/images/studio.jpg"
+        "/images/studio.jpg",
+        "/images/studio46-28.jpg"
       ],
-      "videos": []
+      "videos": [],
+      "content": "Studio 46 approached me to create a series of photographs that could capture the character of the space while visitors experienced a guided tour. Located in a historic family home in Barcelona’s Gràcia neighbourhood, the studio brings together architecture, printmaking, contemporary art and decades of artistic heritage.\n\nThe images were created for the studio’s website and digital communication, with the aim of presenting not only the artworks, but also the atmosphere, history and unique details visitors encounter throughout the space.",
+      "description": "Photography for Studio 46, Barcelona",
+      "year": "2026",
+      "category": "Photography"
     }
   ],
   "categories": [
