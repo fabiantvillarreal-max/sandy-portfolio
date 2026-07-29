@@ -92,9 +92,16 @@
       "role": "Digital Artist",
       "title": "Mini Interactive Experience",
       "images": [
-        "/images/imagenes_video-02.png"
+        "/images/raquel.png",
+        "/images/imagenes_video-02.png",
+        "/images/imagenes_video-01.png",
+        "/images/imagenes_video-03.png",
+        "/images/imagenes_video-04.png",
+        "/images/imagenes_video-03.png"
       ],
-      "videos": [],
+      "videos": [
+        null
+      ],
       "content": "SIMULACRUM 0 is an interactive immersive installation that explores our dependence on smartphones, social media, notifications, and constant digital connectivity. The project was partly inspired by the widespread blackout in Spain and the collective sense of disorientation that emerged when communication networks, internet access, and everyday digital services suddenly became unavailable.\n\nThe experience asks what happens when the systems we rely on disappear—and whether constant connection has made us more capable or increasingly dependent. Through projection, spatial sound, lighting, mobile interaction, and moments of complete darkness, the installation takes visitors from digital comfort and overstimulation to technological collapse, physical awareness, and human reconnection.\n\nRather than presenting technology as entirely negative, the project questions the amount of control we have over our devices and how much control they exercise over our behavior.\n\n",
       "description": "A self-contained interactive experience — not a game, but an immersive journey through sound, visuals and touch.",
       "year": "2025",
